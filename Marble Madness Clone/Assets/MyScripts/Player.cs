@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public float speed = 5;
-    private Rigidbody rb;
+    public Rigidbody rb;
     public float dragForceMax = 1;
     public float dragForceMin = 0.5f;
+    public Vector3 lastCheckpoint;
 
     // Start is called before the first frame update
     void Start()
     {
+        lastCheckpoint = new Vector3(5.65f, 25.5f, 14.04f);
         rb = GetComponent<Rigidbody>();
     }
 
@@ -34,6 +36,6 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical);
 
-        rb.AddForce(movement * speed);   
+        rb.AddForce(movement * speed);
     }
 }
