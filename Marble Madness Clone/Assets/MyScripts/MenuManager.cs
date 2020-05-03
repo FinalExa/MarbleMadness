@@ -6,10 +6,13 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    public float maxTimer;
-    public float timer;
     public Text text_press_start;
+    public float maxTimer;
+    [SerializeField]
+    private float timer;
+    [SerializeField]
     private bool status;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +24,10 @@ public class MenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            StartGame();
+        }
         timerMoving();
     }
 
@@ -40,5 +47,9 @@ public class MenuManager : MonoBehaviour
             text_press_start.enabled = status;
             timer = maxTimer;
         }
+    }
+    void StartGame()
+    {
+        SceneManager.LoadScene(1);
     }
 }
