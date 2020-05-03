@@ -32296,7 +32296,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -32340,7 +32340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 248390519}
-  offset: {x: 0, y: 9, z: -9}
+  offset: {x: 0, y: 11, z: -11}
 --- !u!1001 &963264487
 PrefabInstance:
   m_ObjectHideFlags: 0
