@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public Text text_timer;
     public GameObject pauseUI;
     public GameObject lostGameUI;
+    public GameObject wonGameUI;
     bool pause = false;
     ScoreManager scoremanager;
     GameManager gamemanager;
@@ -57,7 +58,16 @@ public class UIManager : MonoBehaviour
         }
         else if (gamemanager.gamestate == "win")
         {
-
+            wonGameUI.SetActive(true);
+            Time.timeScale = 0f;
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                reloadLevel();
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                goToLeaderboard();
+            }
         }
     }
 
@@ -85,5 +95,11 @@ public class UIManager : MonoBehaviour
     {
         int intScore = (int)gamemanager.scoreTimer;
         text_timer.text = intScore.ToString();
+    }
+
+    void reloadLevel()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(2);
     }
 }

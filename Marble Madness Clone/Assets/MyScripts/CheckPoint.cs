@@ -7,14 +7,12 @@ public class CheckPoint : MonoBehaviour
 {
     Player playerscript;
     public Vector3 currentCheckpointPosition;
-    bool firstTime;
     ScoreManager scoremanager;
     // Start is called before the first frame update
     void Start()
     {
         playerscript = FindObjectOfType<Player>();
         scoremanager = FindObjectOfType<ScoreManager>();
-        firstTime = false;
     }
 
     // Update is called once per frame
@@ -22,12 +20,9 @@ public class CheckPoint : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            if (firstTime == false)
-            {
-                playerscript.lastCheckpoint = currentCheckpointPosition;
-                scoremanager.AddScoreOnCheckPoint();
-                firstTime = true;
-            }
+            playerscript.lastCheckpoint = currentCheckpointPosition;
+            scoremanager.AddScoreOnCheckPoint();
+            this.gameObject.SetActive(false);
         }
     }
 }
