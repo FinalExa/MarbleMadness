@@ -1,27 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     public Text text_score;
-    public Text text_name;
+    public Text text_timer;
     public GameObject pauseUI;
+    public GameObject lostGameUI;
     bool pause = false;
     ScoreManager scoremanager;
+    GameManager gamemanager;
     // Start is called before the first frame update
     void Start()
     {
         scoremanager = FindObjectOfType<ScoreManager>();
-        PlayerNameShow();
+        gamemanager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateScoreText();
-        if (Input.GetKeyDown(KeyCode.Return))
+        UpdateTimer();
+        MenuHandler();
+    }
+
+    void UpdateScoreText()
+    {
+        text_score.text = "Score:\n" + scoremanager.score.ToString();
+    }
+
+    void MenuHandler()
+    {
+        if (Input.GetKeyDown(KeyCode.Return) && gamemanager.gamestate == "normal")
         {
             if (pause == false)
             {
@@ -32,16 +46,19 @@ public class UIManager : MonoBehaviour
                 PauseExit();
             }
         }
-    }
+        else if (gamemanager.gamestate == "lost")
+        {
+            lostGameUI.SetActive(true);
+            Time.timeScale = 0f;
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                goToLeaderboard();
+            }
+        }
+        else if (gamemanager.gamestate == "win")
+        {
 
-    void UpdateScoreText()
-    {
-        text_score.text = "Score:\n" + scoremanager.score.ToString();
-    }
-
-    void PlayerNameShow()
-    {
-        text_name.text = NameSelect.PlayerName;
+        }
     }
 
     void PauseEnter()
@@ -56,5 +73,17 @@ public class UIManager : MonoBehaviour
         pause = !pause;
         pauseUI.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    void goToLeaderboard()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(3);
+    }
+
+    void UpdateTimer()
+    {
+        int intScore = (int)gamemanager.scoreTimer;
+        text_timer.text = intScore.ToString();
     }
 }

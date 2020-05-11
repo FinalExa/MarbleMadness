@@ -28,6 +28,10 @@ public class MenuManager : MonoBehaviour
         {
             StartGame();
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ExitGame();
+        }
         timerMoving();
     }
 
@@ -51,5 +55,10 @@ public class MenuManager : MonoBehaviour
     void StartGame()
     {
         SceneManager.LoadScene(1);
+    }
+
+    void ExitGame()
+    {
+        Application.Quit();
     }
 }
