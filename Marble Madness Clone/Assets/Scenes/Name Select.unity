@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 273361479}
   - component: {fileID: 273361478}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: Name_Select_InputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_LineType: 0
   m_HideMobileInput: 0
   m_CharacterValidation: 0
-  m_CharacterLimit: 0
+  m_CharacterLimit: 8
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -600,6 +600,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1309794789}
+  - component: {fileID: 1309794790}
   m_Layer: 0
   m_Name: Name_Select
   m_TagString: Untagged
@@ -622,6 +623,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1309794790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309794788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f749417a1ff77ff4fa8b954ee9b64d04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerName: 
+  nameselect: {fileID: 273361478}
 --- !u!1 &1791078365
 GameObject:
   m_ObjectHideFlags: 0
