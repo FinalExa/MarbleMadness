@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public int checkpointScore;
     public int timeBonusMultiplier;
     bool pause = false;
+    [SerializeField]
     static public int finalScore;
     UIManager uimanager;
 
@@ -100,6 +101,9 @@ public class GameManager : MonoBehaviour
 
     void Loss()
     {
+        int FS = score;
+        finalScore = FS;
+        uimanager.loss_text.text = "YOU LOSE\nFINAL SCORE => " + FS + "\nPRESS START TO CONTINUE";
         uimanager.lostGameUI.SetActive(true);
         Time.timeScale = 0f;
         if (Input.GetKeyDown(KeyCode.Return))

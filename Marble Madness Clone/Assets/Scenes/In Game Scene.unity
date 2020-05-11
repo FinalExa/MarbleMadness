@@ -28993,7 +28993,7 @@ RectTransform:
   - {fileID: 827467502}
   - {fileID: 768135904}
   m_Father: {fileID: 1208380791}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -40989,9 +40989,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 0
-  timerMax: 60
+  timerMax: 5
   gamestate: 
-  score: 0
+  score: 15000
   checkpointScore: 100
   timeBonusMultiplier: 50
 --- !u!1 &1199163256
@@ -41621,8 +41621,8 @@ RectTransform:
   - {fileID: 1378138253}
   - {fileID: 1547589892}
   - {fileID: 1612363082}
-  - {fileID: 1647626031}
   - {fileID: 876055317}
+  - {fileID: 1647626031}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -58019,14 +58019,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1647626030}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1483674290}
   - {fileID: 1507353751}
   m_Father: {fileID: 1208380791}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
