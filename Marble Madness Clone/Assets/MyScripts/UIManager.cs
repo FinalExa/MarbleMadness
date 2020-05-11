@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
 {
     public Text text_score;
     public Text text_timer;
+    public Text victory_text;
+    public Text loss_text;
     public GameObject pauseUI;
     public GameObject lostGameUI;
     public GameObject wonGameUI;
@@ -34,7 +36,7 @@ public class UIManager : MonoBehaviour
 
     void UpdateTimer()
     {
-        int intScore = (int)gamemanager.scoreTimer;
+        int intScore = (int)gamemanager.timer;
         text_timer.text = intScore.ToString();
     }
 

@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public float scoreTimer;
-    public float scoreTimerMax;
+    public float timer;
+    public float timerMax;
     public string gamestate;
     public int score;
     public int checkpointScore;
+    public int timeBonusMultiplier;
     bool pause = false;
     static public int finalScore;
     UIManager uimanager;
@@ -19,7 +20,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         uimanager = FindObjectOfType<UIManager>();
-        scoreTimer = scoreTimerMax;
+        timer = timerMax;
         gamestate = "normal";
     }
 
@@ -32,13 +33,13 @@ public class GameManager : MonoBehaviour
 
     void DecreaseTimer()
     {
-        if (scoreTimer > 1)
+        if (timer > 1)
         {
-            scoreTimer -= 1 * Time.deltaTime;
+            timer -= 1 * Time.deltaTime;
         }
-        else if (scoreTimer < 1)
+        else if (timer < 1)
         {
-            scoreTimer = 0;
+            timer = 0;
             gamestate = "lost";
         }
     }
@@ -63,25 +64,11 @@ public class GameManager : MonoBehaviour
         }
         else if (gamestate == "lost")
         {
-            uimanager.lostGameUI.SetActive(true);
-            Time.timeScale = 0f;
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                goToLeaderboard();
-            }
+            Loss();
         }
         else if (gamestate == "win")
         {
-            uimanager.wonGameUI.SetActive(true);
-            Time.timeScale = 0f;
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                reloadLevel();
-            }
-            else if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                goToLeaderboard();
-            }
+            Victory();
         }
     }
 
@@ -109,5 +96,32 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(2);
+    }
+
+    void Loss()
+    {
+        uimanager.lostGameUI.SetActive(true);
+        Time.timeScale = 0f;
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            goToLeaderboard();
+        }
+    }
+
+    void Victory()
+    {
+        int FS = score + timeBonusMultiplier * (int)timer;
+        finalScore = FS;
+        uimanager.victory_text.text = "YOU WIN\nFINAL SCORE => " + FS + "\nPRESS START TO CONTINUE\nPRESS ESC TO GO TO\nTHE LEADERBOARD";
+        uimanager.wonGameUI.SetActive(true);
+        Time.timeScale = 0f;
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            reloadLevel();
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            goToLeaderboard();
+        }
     }
 }
