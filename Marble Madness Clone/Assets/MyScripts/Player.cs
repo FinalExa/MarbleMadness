@@ -6,30 +6,65 @@ public class Player : MonoBehaviour
 {
     public float speed = 5;
     public Rigidbody rb;
-    public float dragForceMax = 1;
-    public float dragForceMin = 0.5f;
+    public float dragForceMax;
+    public float dragForceMin;
     public Vector3 lastCheckpoint;
+    [SerializeField]
+    string state;
+    [SerializeField]
+    float timer;
+    [SerializeField]
+    float DeathByFallDamage;
+    [SerializeField]
+    float DeathByFallingDown;
 
     // Start is called before the first frame update
     void Start()
     {
         lastCheckpoint = new Vector3(5.65f, 25.5f, 14.04f);
         rb = GetComponent<Rigidbody>();
+        state = "grounded";
+        timer = 0;
     }
 
     private void Update()
     {
-        if (Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("d") || Input.GetKey("s"))
-        {
-            rb.drag = dragForceMin;
-        }
-        else
-        {
-            rb.drag = dragForceMax;
-        }
+        StateOperations();
     }
     // Update is called once per frame
     void FixedUpdate()
+    {
+        MovementHandler();
+    }
+
+    void StateOperations()
+    {
+        if (state == "grounded")
+        {
+            if (Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("d") || Input.GetKey("s"))
+            {
+                rb.drag = dragForceMin;
+            }
+            else
+            {
+                rb.drag = dragForceMax;
+            }
+        }
+        else if (state == "airborne")
+        {
+            rb.drag = dragForceMin;
+            if (timer < DeathByFallingDown)
+            {
+                timer += 1 * Time.deltaTime;
+            }
+            if (timer >= DeathByFallingDown)
+            {
+                Respawn();
+            }
+        }
+    }
+
+    void MovementHandler()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
@@ -37,5 +72,30 @@ public class Player : MonoBehaviour
         Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical);
 
         rb.AddForce(movement * speed);
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        state = "airborne";
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        state = "grounded";
+        if (timer >= DeathByFallDamage)
+        {
+            Respawn();
+        }
+        else if (timer != 0)
+        {
+            timer = 0;
+        }
+    }
+
+    void Respawn()
+    {
+        timer = 0;
+        transform.position = lastCheckpoint;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 }
