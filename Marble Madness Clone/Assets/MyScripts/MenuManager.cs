@@ -12,11 +12,13 @@ public class MenuManager : MonoBehaviour
     private float timer;
     [SerializeField]
     private bool status;
+    static public int timesPlayed;
     
 
     // Start is called before the first frame update
     void Start()
     {
+        timesPlayed = 0;
         status = true;
         timer = maxTimer;
     }

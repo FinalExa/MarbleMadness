@@ -3,25 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
     public float timer;
     public float timerMax;
+    public float timerMaxAfterFirstPlay;
     public string gamestate;
     public int score;
     public int checkpointScore;
     public int timeBonusMultiplier;
     bool pause = false;
-    [SerializeField]
     static public int finalScore;
+    static public int secondsLeft;
     UIManager uimanager;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (MenuManager.timesPlayed == 0)
+        {
+            timer = timerMax;
+            score = 0;
+        }
+        else
+        {
+            timer = timerMaxAfterFirstPlay + secondsLeft;
+            score = finalScore;
+        }
         uimanager = FindObjectOfType<UIManager>();
-        timer = timerMax;
         gamestate = "normal";
     }
 
@@ -116,6 +127,8 @@ public class GameManager : MonoBehaviour
     {
         int FS = score + timeBonusMultiplier * (int)timer;
         finalScore = FS;
+        MenuManager.timesPlayed++;
+        secondsLeft = (int)timer;
         uimanager.victory_text.text = "YOU WIN\nFINAL SCORE => " + FS + "\nPRESS START TO CONTINUE\nPRESS ESC TO GO TO\nTHE LEADERBOARD";
         uimanager.wonGameUI.SetActive(true);
         Time.timeScale = 0f;
@@ -125,6 +138,7 @@ public class GameManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
+            finalScore = 0;
             goToLeaderboard();
         }
     }
