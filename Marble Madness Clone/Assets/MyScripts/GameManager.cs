@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     static public int finalScore;
     static public int secondsLeft;
     UIManager uimanager;
-    AudioManager audiomanager;
 
     // Start is called before the first frame update
     void Start()
@@ -36,8 +35,9 @@ public class GameManager : MonoBehaviour
             score = finalScore;
         }
         uimanager = FindObjectOfType<UIManager>();
-        audiomanager = FindObjectOfType<AudioManager>();
         gamestate = "normal";
+
+        AudioManager.Instance.PlaySound("MainTrack");
     }
 
     // Update is called once per frame
@@ -112,14 +112,13 @@ public class GameManager : MonoBehaviour
     {
         MenuManager.timesPlayed++;
         secondsLeft = (int)timer;
-        audiomanager.gameObject.SetActive(true);
         Time.timeScale = 1f;
         SceneManager.LoadScene(2);
     }
 
     void Loss()
     {
-        audiomanager.gameObject.SetActive(false);
+        AudioManager.Instance.StopSound("MainTrack");
         int FS = score;
         finalScore = FS;
         uimanager.loss_text.text = "YOU LOSE\nFINAL SCORE => " + FS + "\nPRESS START TO CONTINUE";
@@ -133,7 +132,7 @@ public class GameManager : MonoBehaviour
 
     void Victory()
     {
-        audiomanager.gameObject.SetActive(false);
+        AudioManager.Instance.StopSound("MainTrack");
         int FS = score + timeBonusMultiplier * (int)timer;
         finalScore = FS;
         uimanager.victory_text.text = "YOU WIN\nFINAL SCORE => " + FS + "\nPRESS START TO CONTINUE\nPRESS ESC TO GO TO\nTHE LEADERBOARD";

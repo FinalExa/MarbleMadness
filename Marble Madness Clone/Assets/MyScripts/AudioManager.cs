@@ -33,6 +33,11 @@ public class Sound
     {
         source.Play();
     }
+
+    public void StopAudio()
+    {
+        source.Stop();
+    }
 }
 
 
@@ -74,5 +79,16 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.PlayAudio();
+    }
+
+    public void StopSound(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.clipName == name);
+        if (s == null)
+        {
+            Debug.LogError("Sound: " + name + " NotFound");
+            return;
+        }
+        s.StopAudio();
     }
 }
