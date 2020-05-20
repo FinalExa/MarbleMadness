@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     {
         if (state == "grounded")
         {
-            if (Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("d") || Input.GetKey("s"))
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
             {
                 rb.drag = dragForceMin;
             }
@@ -80,14 +80,17 @@ public class Player : MonoBehaviour
     }
     private void OnCollisionStay(Collision collision)
     {
-        state = "grounded";
-        if (timer >= DeathByFallDamage)
+        if (collision.collider.gameObject.GetComponent<VoidScript>() == null) 
         {
-            Respawn();
-        }
-        else if (timer != 0)
-        {
-            timer = 0;
+            state = "grounded";
+            if (timer >= DeathByFallDamage)
+            {
+                Respawn();
+            }
+            else if (timer != 0)
+            {
+                timer = 0;
+            }
         }
     }
 
