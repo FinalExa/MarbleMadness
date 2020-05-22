@@ -67,15 +67,22 @@ public class GameManager : MonoBehaviour
 
     void GameStateHandler()
     {
-        if (Input.GetKeyDown(KeyCode.Return) && gamestate == "normal")
+        if (gamestate == "normal")
         {
-            if (pause == false)
+            if (Input.GetKeyDown(KeyCode.Return))
             {
-                PauseEnter();
+                if (pause == false)
+                {
+                    PauseEnter();
+                }
+                else
+                {
+                    PauseExit();
+                }
             }
-            else
+            else if (Input.GetKeyDown(KeyCode.Escape) && pause == true)
             {
-                PauseExit();
+                BackToMainMenu();
             }
         }
         else if (gamestate == "lost")
@@ -100,6 +107,12 @@ public class GameManager : MonoBehaviour
         pause = !pause;
         uimanager.pauseUI.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    void BackToMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
     }
 
     void goToLeaderboard()
