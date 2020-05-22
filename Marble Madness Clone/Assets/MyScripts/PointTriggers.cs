@@ -18,8 +18,16 @@ public class PointTriggers : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            gamemanager.AddScoreOnCheckPoint();
-            this.gameObject.SetActive(false);
+            if (playerscript.state != "airborne" && playerscript.timer < playerscript.DeathByFallingDown)
+            {
+                PointTriggerEffect();
+            }
         }
+    }
+
+    void PointTriggerEffect()
+    {
+        gamemanager.AddScoreOnCheckPoint();
+        this.gameObject.SetActive(false);
     }
 }

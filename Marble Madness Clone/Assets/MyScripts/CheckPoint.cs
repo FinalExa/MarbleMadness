@@ -20,9 +20,17 @@ public class CheckPoint : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            playerscript.lastCheckpoint = currentCheckpointPosition;
-            gamemanager.AddScoreOnCheckPoint();
-            this.gameObject.SetActive(false);
+            if (playerscript.state != "airborne" && playerscript.timer < playerscript.DeathByFallingDown)
+            {
+                CheckPointEffect();
+            }
         }
+    }
+
+    void CheckPointEffect()
+    {
+        playerscript.lastCheckpoint = currentCheckpointPosition;
+        gamemanager.AddScoreOnCheckPoint();
+        this.gameObject.SetActive(false);
     }
 }

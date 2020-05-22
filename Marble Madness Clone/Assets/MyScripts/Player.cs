@@ -9,14 +9,12 @@ public class Player : MonoBehaviour
     public float dragForceMax;
     public float dragForceMin;
     public Vector3 lastCheckpoint;
-    [SerializeField]
-    string state;
-    [SerializeField]
-    float timer;
+    public string state;
+    public float timer;
     [SerializeField]
     float DeathByFallDamage;
     [SerializeField]
-    float DeathByFallingDown;
+    public float DeathByFallingDown;
 
     // Start is called before the first frame update
     void Start()
