@@ -12,9 +12,10 @@ public class Player : MonoBehaviour
     public string state;
     public float timer;
     [SerializeField]
-    float DeathByFallDamage;
+    float lastYPosition;
     [SerializeField]
     public float DeathByFallingDown;
+    public float FallDamageOffset;
 
     // Start is called before the first frame update
     void Start()
@@ -78,16 +79,24 @@ public class Player : MonoBehaviour
     }
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.collider.gameObject.GetComponent<VoidScript>() == null) 
+        lastYPosition = this.transform.position.y;
+        if (collision.collider.gameObject.GetComponent<VoidScript>() == null)
         {
             state = "grounded";
-            if (timer >= DeathByFallDamage)
-            {
-                Respawn();
-            }
-            else if (timer != 0)
+            if (timer != 0)
             {
                 timer = 0;
+            }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.gameObject.GetComponent<VoidScript>() == null)
+        {
+            if (this.transform.position.y <= lastYPosition - FallDamageOffset)
+            {
+                Respawn();
             }
         }
     }
@@ -96,6 +105,7 @@ public class Player : MonoBehaviour
     {
         timer = 0;
         transform.position = lastCheckpoint;
+        lastYPosition = lastCheckpoint.y;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
     }
