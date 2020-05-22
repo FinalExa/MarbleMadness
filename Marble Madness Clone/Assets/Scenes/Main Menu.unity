@@ -152,8 +152,8 @@ MonoBehaviour:
   sounds:
   - clipName: MainTrack
     clip: {fileID: 8300000, guid: 1d2503ba0dbcb694a92e9575465d9923, type: 3}
-    volume: 0.025
-    pitch: 0
+    volume: 0.05
+    pitch: 1
     loop: 1
     playOnAwake: 0
     mixer: {fileID: -8434828617247383905, guid: b81a2baf4d49dc04ba3dc11842e570f6,
