@@ -16,6 +16,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     public float DeathByFallingDown;
     public float FallDamageOffset;
+    public float FallTimer;
+    public float MaxFallTimer;
+    Renderer rend;
+    bool movementEnabled;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +28,9 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         state = "grounded";
         timer = 0;
+        FallTimer = MaxFallTimer;
+        rend = this.GetComponent<Renderer>();
+        movementEnabled = true;
     }
 
     private void Update()
@@ -65,12 +72,15 @@ public class Player : MonoBehaviour
 
     void MovementHandler()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        if (movementEnabled == true)
+        {
+            float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveVertical = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical);
+            Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical);
 
-        rb.AddForce(movement * speed);
+            rb.AddForce(movement * speed);
+        }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -79,24 +89,20 @@ public class Player : MonoBehaviour
     }
     private void OnCollisionStay(Collision collision)
     {
-        lastYPosition = this.transform.position.y;
-        if (collision.collider.gameObject.GetComponent<VoidScript>() == null)
-        {
-            state = "grounded";
-            if (timer != 0)
-            {
-                timer = 0;
-            }
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
         if (collision.collider.gameObject.GetComponent<VoidScript>() == null)
         {
             if (this.transform.position.y <= lastYPosition - FallDamageOffset)
             {
-                Respawn();
+                RespawnByFallDamage();
+            }
+            else
+            {
+                lastYPosition = this.transform.position.y;
+                state = "grounded";
+                if (timer != 0)
+                {
+                    timer = 0;
+                }
             }
         }
     }
@@ -105,8 +111,35 @@ public class Player : MonoBehaviour
     {
         timer = 0;
         transform.position = lastCheckpoint;
-        lastYPosition = lastCheckpoint.y;
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+            lastYPosition = lastCheckpoint.y;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+    }
+
+    void RespawnByFallDamage()
+    {
+        Color colorchange;
+        timer = 0;
+        if (FallTimer>0)
+        {
+            movementEnabled = false;
+            FallTimer -= 1 * Time.deltaTime;
+            colorchange = Color.Lerp(Color.white, Color.red, Mathf.PingPong(Time.time * 2, 1));
+            rend.material.color = colorchange;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+        else if (FallTimer < 0)
+        {
+            FallTimer = 0;
+        }
+        else
+        {
+            rend.material.color = Color.white;
+            FallTimer = MaxFallTimer;
+            transform.position = lastCheckpoint;
+            lastYPosition = lastCheckpoint.y;
+            movementEnabled = true;
+        }
     }
 }
