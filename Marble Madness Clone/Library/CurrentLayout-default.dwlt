@@ -504,7 +504,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 56fbffff
+      m_ExpandedIDs: be24fffff424ffff8425ffff8e25ffff9625ffff9e25fffffc65ffff5e66ffffe2c9ffff7afbffff2e3600007c3600004e38000030390000d83e0000284200006249000090951100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -564,9 +564,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -33.886425, y: -37.169228, z: 176.54068}
+    m_Target: {x: 8.948416, y: 34.79684, z: -37.494667}
     speed: 2
-    m_Value: {x: -33.886425, y: -37.169228, z: 176.54068}
+    m_Value: {x: 8.948416, y: 34.79684, z: -37.494667}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -595,13 +595,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.16006576, y: -0.1230555, z: 0.01993329, w: 0.9792979}
+    m_Target: {x: -0.2487581, y: -0.16143441, z: 0.041999813, w: -0.95424813}
     speed: 2
-    m_Value: {x: 0.16008066, y: -0.12157516, z: 0.019691346, w: 0.9793906}
+    m_Value: {x: -0.24878411, y: -0.15997925, z: 0.041620485, w: -0.9543484}
   m_Size:
-    m_Target: 217.2398
+    m_Target: 3.2999995
     speed: 2
-    m_Value: 217.2398
+    m_Value: 3.300205
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -620,7 +620,7 @@ MonoBehaviour:
     m_DynamicClip: 1
     m_OcclusionCulling: 0
   m_ShowGlobalGrid: 1
-  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+  m_LastSceneViewRotation: {x: 0.31814414, y: -0.36420295, z: -0.13422394, w: -0.86511105}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -692,20 +692,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/MyMaterials
+    - Assets/Scenes
   m_ViewMode: 1
   m_StartGridSize: 72
   m_LastFolders:
-  - Assets/MyMaterials
+  - Assets/Scenes
   m_LastFoldersGridSize: 72
   m_LastProjectPath: D:\Git\MarbleMadness\Marble Madness Clone
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 922f0000
-    m_LastClickedID: 12178
-    m_ExpandedIDs: 00000000ba2c0000
+    m_SelectedIDs: 7e2d0000
+    m_LastClickedID: 11646
+    m_ExpandedIDs: 00000000b22c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -733,7 +733,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ba2c0000
+    m_ExpandedIDs: 00000000b22c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -760,7 +760,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000000000009c3effff6e3dffffa22f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
