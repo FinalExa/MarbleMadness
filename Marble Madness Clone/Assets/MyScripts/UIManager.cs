@@ -36,7 +36,7 @@ public class UIManager : MonoBehaviour
 
     void UpdateTimer()
     {
-        int intScore = (int)gamemanager.timer;
+        int intScore = (int)gamemanager.timer + 1;
         text_timer.text = intScore.ToString();
     }
 

@@ -49,11 +49,11 @@ public class GameManager : MonoBehaviour
 
     void DecreaseTimer()
     {
-        if (timer > 1)
+        if (timer > 0)
         {
             timer -= 1 * Time.deltaTime;
         }
-        else if (timer < 1)
+        else if (timer < 0)
         {
             timer = 0;
             gamestate = "lost";

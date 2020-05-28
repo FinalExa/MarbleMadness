@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public float FallDamageOffset;
     public float FallTimer;
     public float MaxFallTimer;
+    public float yForce;
     Renderer rend;
     bool movementEnabled;
 
@@ -56,7 +57,7 @@ public class Player : MonoBehaviour
                 rb.drag = dragForceMax;
             }
         }
-        else if (state == "airborne")
+        else if (state == "airborne" && movementEnabled == true)
         {
             rb.drag = dragForceMin;
             if (timer < DeathByFallingDown)
@@ -77,7 +78,7 @@ public class Player : MonoBehaviour
             float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
 
-            Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical);
+            Vector3 movement = new Vector3(moveHorizontal, -yForce, moveVertical);
 
             rb.AddForce(movement * speed);
         }
@@ -111,9 +112,9 @@ public class Player : MonoBehaviour
     {
         timer = 0;
         transform.position = lastCheckpoint;
-            lastYPosition = lastCheckpoint.y;
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+        lastYPosition = lastCheckpoint.y;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 
     void RespawnByFallDamage()
