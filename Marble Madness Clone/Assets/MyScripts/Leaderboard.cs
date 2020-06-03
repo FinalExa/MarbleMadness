@@ -16,7 +16,7 @@ public class Leaderboard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        loadData();
+        LoadData();
         leaderboard_text.text = "Leaderboard:\n";
         UpdateAndShowLeaderboard();   
     }
@@ -68,7 +68,7 @@ public class Leaderboard : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    void loadData()
+    void LoadData()
     {
         for (int i = 0; i < 10; i++)
         {
