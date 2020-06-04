@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
         }
         else if (timer < 0)
         {
-            timer = 0;
+            timer = -1;
             gamestate = "lost";
         }
     }
@@ -115,13 +115,13 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    void goToLeaderboard()
+    void GoToLeaderboard()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(3);
     }
 
-    void reloadLevel()
+    void ReloadLevel()
     {
         MenuManager.timesPlayed++;
         secondsLeft = (int)timer;
@@ -136,10 +136,11 @@ public class GameManager : MonoBehaviour
         finalScore = FS;
         uimanager.loss_text.text = "YOU LOSE\nFINAL SCORE => " + FS + "\nPRESS START TO CONTINUE";
         uimanager.lostGameUI.SetActive(true);
+        uimanager.text_timer.text = "0";
         Time.timeScale = 0f;
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            goToLeaderboard();
+            GoToLeaderboard();
         }
     }
 
@@ -153,12 +154,12 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            reloadLevel();
+            ReloadLevel();
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
             finalScore = 0;
-            goToLeaderboard();
+            GoToLeaderboard();
         }
     }
 }
